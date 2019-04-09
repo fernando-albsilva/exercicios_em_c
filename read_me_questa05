@@ -1,6 +1,6 @@
-Cria uma matriz de numeros (float) onde se encontra cadastrado o setor e o salario correspondente do funcionario de cada setor.
+Cria uma matriz de numeros (float) onde se encontra cadastrado o setor e o salario correspondente do funcionario de cada setor;
 
-Cria uma estrutura (struct) que cadastra a mátricula do funcionário,o setor e pesquisa na matriz pelo salário correspondente.
+Cria uma estrutura (struct) que cadastra a mátricula do funcionário,o setor e pesquisa na matriz pelo salário correspondente;
 
 Strucut empregado{
     matricula;
@@ -8,7 +8,23 @@ Strucut empregado{
     salario;
 };
 
-A Tanto a estrutura quanto a matriz é alocada dinamicamente de acordo com o tamanho de funcionarios que o usuario determina.
+A Tanto a estrutura quanto a matriz é alocada dinamicamente de acordo com o tamanho de funcionarios que o usuario determina;
 
 
+Funções:
 
+float **alloc_matr(float **, int);  ==> Aloca a matriz do tipo "float" que guarda o setor e o salario correspondete;
+
+void print_matr(float **, int);   ==>  Imprime como ficou a matriz;
+
+int tamanho_setor();  ==> Le quantos setores serao cadastrados;
+
+void read_matr(float **, int);  ==> Inseri na matriz os dados entrados pelo usuario;
+
+struct empregado *calcula_total_funcionarios(int *);  ==> aloca um vetor de struct comforme a quantidade de funcionarios que o usuario determinou;
+
+void cadastra_funcionario(int, struct empregado *, float **, int); ==> cadastra o funcionario de acordo com sua matricula e setor, faz a busca do salario referente na matriz e poe tudo dentro de uma estrutura funcionario;
+
+float busca_salario(float setor, float **, int); ==> faz a busca do salario correspondente ao setor digitado pelo usuario;
+
+void busca_matricula(struct empregado *, int); ==> faz uma busca sequencial de uma matricula especificada pelo usuario  no vetor de struturas cadastrados;

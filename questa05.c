@@ -7,6 +7,7 @@ void read_matr(float **, int);
 struct empregado *calcula_total_funcionarios(int *);
 void cadastra_funcionario(int, struct empregado *, float **, int);
 float busca_salario(float setor, float **, int);
+void busca_matricula(struct empregado *, int);
 struct empregado
 {
     int matricula;
@@ -16,8 +17,8 @@ struct empregado
 
 int main()
 {
-    float **matr, *mat;
-    int i, *p_tamanho, tamanho = 0, *p_total_funcionario, total_funcionario;
+    float **matr;
+    int tamanho = 0, *p_total_funcionario, total_funcionario;
     struct empregado *funcionario;
     p_total_funcionario = &total_funcionario;
     tamanho = tamanho_setor();
@@ -27,7 +28,9 @@ int main()
 
     funcionario = calcula_total_funcionarios(p_total_funcionario);
     cadastra_funcionario(total_funcionario, funcionario, matr, tamanho);
-
+    busca_matricula(funcionario, total_funcionario);
+    free(matr);
+    free(funcionario);
     return 1;
 }
 
@@ -117,29 +120,47 @@ struct empregado *calcula_total_funcionarios(int *total)
 void cadastra_funcionario(int total, struct empregado *funcionario, float **matr, int tamanho)
 {
 
-    int i, matricula;
+    int i, k, matricula, teste = 0;
     float setor;
     for (i = 0; i < total; i++)
     {
         printf("\ndigite a matricula do funcionario %d :", i);
         scanf("%d", &matricula);
         funcionario[i].matricula = matricula;
-        printf("\nDigite o setor do funcionario :");
-        scanf("%f", &setor);
+        do
+        {
+
+            printf("\nDigite o setor do funcionario :");
+            scanf("%f", &setor);
+
+            for (k = 0; k < tamanho; k++)
+            {
+                if (setor == matr[k][0])
+                {
+                    teste = 1;
+                }
+                else
+                {
+                    printf("\nO numero do setor nao existe no cadastro, por favor digite um setor valido:\n");
+                }
+            }
+
+        } while (teste == 0);
         funcionario[i].setor = setor;
-        funcionario[i].salario = busca_salario(setor, matr,tamanho);
+
+        funcionario[i].salario = busca_salario(setor, matr, tamanho);
     }
 
     for (i = 0; i < total; i++)
     {
-        printf("\n Matricula : %d   Setor : %f  Salaraio : %f", funcionario[i].matricula, funcionario[i].setor,funcionario[i].salario);
+        printf("\n Matricula : %d   Setor : %f  Salaraio : R$ %.2f", funcionario[i].matricula, funcionario[i].setor, funcionario[i].salario);
     }
     printf("\n");
 }
 
 float busca_salario(float setor, float **matr, int tamanho)
 {
-    int i, j=0;
+    int i, j = 0;
     float achou;
 
     for (i = 0; i < tamanho; i++)
@@ -147,7 +168,32 @@ float busca_salario(float setor, float **matr, int tamanho)
 
         if (matr[i][j] == setor)
         {
-            return matr[i][j+1];
+            return matr[i][j + 1];
         }
     }
+}
+
+void busca_matricula(struct empregado *funcionario, int total)
+{
+    int matricula, i, teste = 0;
+    do
+    {
+        printf("\nDigite a matricula do funcionario para buscalo no cadastro:");
+        scanf("%d", &matricula);
+
+        for (i = 0; i < total; i++)
+        {
+            if (matricula == funcionario[i].matricula)
+            {
+                teste = 1;
+                printf("\n Matricula: %d  Setor : %f  Salario : R$ %.2f", funcionario[i].matricula,
+                       funcionario[i].setor,
+                       funcionario[i].salario);
+            }
+            else
+            {
+                printf("\n O funcionario nao se encontra no cadastro, por favor verifique a matricula:\n");
+            }
+        }
+    } while (teste == 0);
 }
