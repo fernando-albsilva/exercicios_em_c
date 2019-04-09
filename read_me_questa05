@@ -1,0 +1,14 @@
+Cria uma matriz de numeros (float) onde se encontra cadastrado o setor e o salario correspondente do funcionario de cada setor.
+
+Cria uma estrutura (struct) que cadastra a mátricula do funcionário,o setor e pesquisa na matriz pelo salário correspondente.
+
+Strucut empregado{
+    matricula;
+    setor;
+    salario;
+};
+
+A Tanto a estrutura quanto a matriz é alocada dinamicamente de acordo com o tamanho de funcionarios que o usuario determina.
+
+
+
