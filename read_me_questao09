@@ -1,0 +1,27 @@
+Programa que aloca uma matriz quadrada dinamicamente, e faz a leitura da diagonal principal para baixo. Acima da diagonao principal é toda prenchida com o valor 0. Pede ao usuario que entre com um valor para ver se o mesmo existe na matriz.
+
+Funçoes:
+
+
+int **aloca_mat(int **, int);
+=> Aloca dinamicamente a matriz;
+
+
+void dimensao_mat(int *);
+=>Pede ao usuário que entre com a dimensao da matriz que sera criada;
+
+
+void read_mat(int **, int);
+=>Le os valores da matriz com a entrada feita pelo usuario;
+
+
+void print_mat(int **, int);
+=>imprime a matriz;
+
+
+void busca_mat(int **, int);
+=>Faz a busca do elemento para verificar se o mesmo existe na matriz;
+
+
+
+
