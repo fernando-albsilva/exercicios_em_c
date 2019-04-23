@@ -8,7 +8,9 @@ int **preenche_mat(int **, int, int);
 void imprime_mat(int **mat, int, int);
 int *tamanho_mat_u(int *, int *, int *);
 int *preenche_mat_u(int *, int, int);
-void imprime_mat_u(int*,int ,int);
+void imprime_mat_u(int *, int, int);
+int **libera_mat(int **);
+int *libera_mat_u(int *);
 int main()
 {
     int **mat, tam_l, tam_c;
@@ -18,8 +20,10 @@ int main()
     mat = preenche_mat(mat, tam_l, tam_c);
     imprime_mat(mat, tam_l, tam_c);
     mat_u = tamanho_mat_u(mat_u, &tam_u_l, &tam_u_c);
-    mat_u = preenche_mat_u(mat_u,tam_u_l,tam_u_c);
-    imprime_mat_u(mat_u,tam_u_l,tam_u_c);
+    mat_u = preenche_mat_u(mat_u, tam_u_l, tam_u_c);
+    imprime_mat_u(mat_u, tam_u_l, tam_u_c);
+    mat = libera_mat(mat);
+    mat_u = libera_mat_u(mat_u);
 
     return 0;
 }
@@ -99,7 +103,7 @@ int *tamanho_mat_u(int *mat_u, int *l_p, int *c_p)
 void imprime_mat(int **mat, int l, int c)
 {
     int i, j;
-    
+
     printf("\n-------------INICIO--MATRIZ--TRANSPOSTA-------\n\n");
     for (i = 0; i < l; i++)
     {
@@ -112,35 +116,47 @@ void imprime_mat(int **mat, int l, int c)
     printf("\n-------------FIM--MATRIZ--TRANSPOSTA----------\n");
 }
 
-int * preenche_mat_u(int* mat_u,int l,int c)
+int *preenche_mat_u(int *mat_u, int l, int c)
 {
-    int i,j;
+    int i, j;
 
-    for(i=0;i<l;i++)
+    for (i = 0; i < l; i++)
     {
-        for(j=0;j<c;j++)
+        for (j = 0; j < c; j++)
         {
-            printf("\nDigite mat [%d][%d] :",i,j);
-            scanf("%d",&mat_u[i*c+j]);
+            printf("\nDigite mat [%d][%d] :", i, j);
+            scanf("%d", &mat_u[i * c + j]);
         }
     }
 
     return mat_u;
-
 }
 
-void imprime_mat_u(int* mat_u,int l,int c)
+void imprime_mat_u(int *mat_u, int l, int c)
 {
-    int i,j;
+    int i, j;
     printf("\n-------------INICIO--MATRIZ--UNIDIMENSIONAL-------\n\n");
-     for(i=0;i<l;i++)
+    for (i = 0; i < l; i++)
     {
-        for(j=0;j<c;j++)
+        for (j = 0; j < c; j++)
         {
-            printf("%5d",mat_u[i*c+j]);
-            
+            printf("%5d", mat_u[i * c + j]);
         }
         printf("\n\n");
     }
     printf("\n-------------FIM--MATRIZ--UNIDIMENSIONAL----------\n");
+}
+int **libera_mat(int **mat)
+{
+
+    free(mat);
+    return NULL;
+}
+
+int *libera_mat_u(int *mat_u)
+{
+
+    free(mat_u);
+
+    return NULL;
 }
